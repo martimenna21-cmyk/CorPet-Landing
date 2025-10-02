@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corpet – Corporate Pet-Benefits Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ========== CSS RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+      min-width: 320px;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button, input, textarea { font: inherit; }
+
+    /* ========== DESIGN TOKENS ========== */
+    :root {
+      --clr-main-1: #99AA86;
+      --clr-main-2: #F39386;
+      --clr-secondary: #54342E;
+      --clr-light: #F8F8F8;
+      --radius: 8px;
+      --transition: .25s ease-in-out;
+      --max-width: 1200px;
+    }
+
+    /* ========== LAYOUT HELPERS ========== */
+    .container {
+      width: 90%;
+      max-width: var(--max-width);
+      margin-inline: auto;
+    }
+    .flex-col { display: flex; flex-direction: column; gap: 1rem; }
+    .flex-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .grid-3 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: .75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: var(--clr-main-1);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #889976; }
+    .btn-secondary {
+      background: var(--clr-main-2);
+      color: #fff;
+    }
+    .btn-secondary:hover { background: #e08276; }
+
+    /* ========== HEADER / NAV ========== */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #eaeaea;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--clr-secondary);
+    }
+    .nav-links {
+      display: none;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 3rem 0 4rem;
+      background: var(--clr-light);
+    }
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .hero__text h1 {
+      font-size: 2rem;
+      color: var(--clr-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero__text p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      max-width: 45ch;
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hero__img img {
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px rgb(0 0 0 / .08);
+    }
+    @media (min-width: 900px) {
+      .hero__content {
+        flex-direction: row;
+        align-items: center;
+      }
+      .hero__text h1 { font-size: 2.75rem; }
+      .hero__text, .hero__img { flex: 1 1 50%; }
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      padding: 4rem 0;
+    }
+    .services h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2rem;
+      color: var(--clr-secondary);
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid #eaeaea;
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgb(0 0 0 / .06);
+    }
+    .service-card i {
+      font-size: 2.5rem;
+      color: var(--clr-main-1);
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      margin-bottom: .75rem;
+      color: var(--clr-secondary);
+    }
+
+    /* ========== CASES / DEMO ========== */
+    .cases {
+      background: var(--clr-light);
+      padding: 4rem 0;
+    }
+    .cases h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2rem;
+      color: var(--clr-secondary);
+    }
+    .case-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / .04);
+    }
+    .case-card h4 {
+      color: var(--clr-main-2);
+      font-size: 1.25rem;
+    }
+    .metric {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--clr-main-1);
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      padding: 4rem 0;
+    }
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--clr-secondary);
+    }
+    .contact form {
+      max-width: 600px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+    }
+    .contact textarea { resize: vertical; min-height: 120px; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--clr-secondary);
+      color: #fff;
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+    .footer__socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer__socials a {
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+    .footer__socials a:hover { color: var(--clr-main-2); }
+    footer p {
+      font-size: .875rem;
+      opacity: .8;
+    }
+
+    /* ========== MINOR MEDIA QUERY ADJUSTMENTS ========== */
+    @media (min-width: 768px) {
+      .hero__text h1 { font-size: 2.5rem; }
+      .services h2, .cases h2, .contact h2 { font-size: 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#">Corpet</a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <div class="container hero__content">
+      <div class="hero__text">
+        <h1>Pet Benefits That Keep Teams Happy &amp; Productive</h1>
+        <p>Corpet connects corporations with trusted pet-care providers—daycares, vets, walkers, salons—so you can give employees the pet perks they deserve, hassle-free.</p>
+        <div class="hero__actions">
+          <button class="btn btn-primary">Book a Demo</button>
+          <a href="#contact" class="btn btn-secondary">Get Started</a>
+        </div>
+      </div>
+      <div class="hero__img">
+        <img src="https://placehold.co/600x400/99AA86/ffffff?text=Corpet+Hero" alt="Happy pets at work">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2>One Platform, Every Pet Service</h2>
+      <div class="grid-3">
+        <article class="service-card">
+          <i class="fa-solid fa-shield-dog"></i>
+          <h3>Day Care & Boarding</h3>
+          <p>Verified daycares and boarding facilities for worry-free workdays and business trips.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-stethoscope"></i>
+          <h3>Veterinary Access</h3>
+          <p>Preferred appointments with top-tier veterinary clinics for routine and emergency care.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-person-walking"></i>
+          <h3>Pet Walking</h3>
+          <p>Professional dog walkers to keep pets active while employees focus on work.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-scissors"></i>
+          <h3>Grooming & Salons</h3>
+          <p>Discounted grooming packages to keep pets healthy, clean, and looking their best.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CASES / DEMO ========== -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <h2>Trusted by Modern Teams</h2>
+      <div class="grid-3">
+        <div class="case-card">
+          <h4>TechCorp Inc.</h4>
+          <p>Reduced employee pet-related absenteeism by <span class="metric">28%</span> within six months of launching Corpet benefits.</p>
+        </div>
+        <div class="case-card">
+          <h4>Global Finance Ltd.</h4>
+          <p>Surveyed staff satisfaction up <span class="metric">35%</span> after rolling out subsidized vet visits via Corpet.</p>
+        </div>
+        <div class="case-card">
+          <h4>Creative Studios</h4>
+          <p>Onboarded 200+ employees in under a week, booking <span class="metric">500+</span> pet services in the first month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Let&rsquo;s Connect Your Company</h2>
+      <form action="https://formspree.io/f/xldpnppw" method="POST">
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="email" name="Email" placeholder="Email Address" required>
+        <input type="text" name="Company" placeholder="Company Name" required>
+        <textarea name="Message" placeholder="Tell us about your pet-benefit goals..." required></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <div class="footer__socials">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="mailto:hello@corpet.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <p>&copy; <span id="year"></span> Corpet. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dynamic year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
